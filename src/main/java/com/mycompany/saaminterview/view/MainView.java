@@ -49,6 +49,7 @@ public class MainView extends javax.swing.JFrame {
             }
         });
 
+        EmployeeRegisterButton.setVisible(false);
         EmployeeRegisterButton.setText("Cadastro de Funcionário");
         EmployeeRegisterButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,8 +168,8 @@ public class MainView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton EmployeeRegisterButton;
-    private javax.swing.JButton LoginButton;
+    public static javax.swing.JButton EmployeeRegisterButton;
+    public static javax.swing.JButton LoginButton;
     private javax.swing.JButton RegisterButton;
     // End of variables declaration//GEN-END:variables
 }

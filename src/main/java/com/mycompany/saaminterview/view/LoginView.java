@@ -105,9 +105,10 @@ public class LoginView extends javax.swing.JFrame {
         
         Boolean isValidEmail = UtilsString.validateEmail(email);
         Boolean isValidPassword = password != null && password.length() > 0;
-        
+
         if (isValidEmail && isValidPassword) {
-          //lógica para criar novo registro no db
+            MainView.EmployeeRegisterButton.setVisible(true);
+            MainView.LoginButton.setEnabled(false);
         } else {
             JOptionPane.showMessageDialog(this, "Credênciais inválidas ou usuário não existente!", "Alerta", JOptionPane.WARNING_MESSAGE);
         }
