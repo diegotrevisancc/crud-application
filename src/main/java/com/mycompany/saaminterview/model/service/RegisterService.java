@@ -5,10 +5,7 @@
 package com.mycompany.saaminterview.model.service;
 
 import com.mycompany.saaminterview.model.entity.User;
-import com.mycompany.saaminterview.utils.DatabaseUtils;
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import com.mycompany.saaminterview.utils.EncodingUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
@@ -25,7 +22,7 @@ public class RegisterService {
     
     public void register(String email, String name, String password) {
         try {
-            String encodedPassword = this.encodePassword(password);
+            String encodedPassword = EncodingUtils.encodePassword(password);
             if (encodedPassword != null) {
                 User register = new User(email, name, encodedPassword);          
                 String sql = "INSERT INTO users (email, name, password) VALUES (?, ?, ?)";
@@ -44,25 +41,6 @@ public class RegisterService {
             }
         } catch (Exception exception) {
             exception.printStackTrace();
-        }
-    }
-    
-    private String encodePassword(String password) {
-        try {
-            MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
-            byte messageDigest[] = algorithm.digest(password.getBytes());            
-            StringBuilder hexString = new StringBuilder();
-            for (byte b : messageDigest) {
-                String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1) {
-                    hexString.append('0');
-                }
-                hexString.append(hex);
-            }
-            return hexString.toString();    
-        } catch (NoSuchAlgorithmException exception) {
-            exception.printStackTrace();
-            return null;
         }
     }
 }
