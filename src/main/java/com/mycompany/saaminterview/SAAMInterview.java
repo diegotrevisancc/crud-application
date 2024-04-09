@@ -4,6 +4,8 @@
 
 package com.mycompany.saaminterview;
 
+import com.mycompany.saaminterview.view.MainView;
+
 /**
  *
  * @author diego
@@ -11,6 +13,6 @@ package com.mycompany.saaminterview;
 public class SAAMInterview {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        new MainView().main(args);
     }
 }
