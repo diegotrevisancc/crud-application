@@ -8,7 +8,7 @@ package com.mycompany.saaminterview.model.entity;
  *
  * @author diego
  */
-public class Register {
+public class User {
     
     private String name;
     
@@ -16,7 +16,7 @@ public class Register {
     
     private String password;
 
-    public Register(String name, String email, String password) {
+    public User(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;

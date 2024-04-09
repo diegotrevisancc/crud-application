@@ -4,7 +4,7 @@
  */
 package com.mycompany.saaminterview.model.service;
 
-import com.mycompany.saaminterview.model.entity.Register;
+import com.mycompany.saaminterview.model.entity.User;
 import com.mycompany.saaminterview.utils.DatabaseUtils;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -27,7 +27,7 @@ public class RegisterService {
         try {
             String encodedPassword = this.encodePassword(password);
             if (encodedPassword != null) {
-                Register register = new Register(email, name, encodedPassword);          
+                User register = new User(email, name, encodedPassword);          
                 String sql = "INSERT INTO users (email, name, password) VALUES (?, ?, ?)";
                 PreparedStatement statement = this.connection.prepareStatement(sql);
                 statement.setString(1, register.getEmail());
