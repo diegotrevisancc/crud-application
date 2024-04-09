@@ -50,9 +50,17 @@ public class RegisterService {
     private String encodePassword(String password) {
         try {
             MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
-            byte messageDigest[] = algorithm.digest(password.getBytes("UTF-8"));
-            return new String(messageDigest);
-        } catch (NoSuchAlgorithmException | UnsupportedEncodingException exception) {
+            byte messageDigest[] = algorithm.digest(password.getBytes());            
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : messageDigest) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+            return hexString.toString();    
+        } catch (NoSuchAlgorithmException exception) {
             exception.printStackTrace();
             return null;
         }
