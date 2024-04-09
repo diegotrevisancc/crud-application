@@ -4,6 +4,8 @@
  */
 package com.mycompany.saaminterview.view;
 
+import com.mycompany.saaminterview.control.LoginController;
+import com.mycompany.saaminterview.control.RegisterController;
 import com.mycompany.saaminterview.utils.UtilsString;
 import javax.swing.JOptionPane;
 
@@ -107,8 +109,16 @@ public class LoginView extends javax.swing.JFrame {
         Boolean isValidPassword = password != null && password.length() > 0;
 
         if (isValidEmail && isValidPassword) {
-            MainView.EmployeeRegisterButton.setVisible(true);
-            MainView.LoginButton.setEnabled(false);
+            LoginController loginController = new LoginController();
+            boolean isLoggedIn = loginController.login(email, password);
+            if (isLoggedIn) {
+                MainView.EmployeeRegisterButton.setVisible(true);
+                MainView.LoginButton.setEnabled(false);
+                JOptionPane.showMessageDialog(this, "Login efetuado!", "Alerta", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Credênciais inválidas ou usuário não existente!", "Alerta", JOptionPane.WARNING_MESSAGE);
+
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Credênciais inválidas ou usuário não existente!", "Alerta", JOptionPane.WARNING_MESSAGE);
         }
