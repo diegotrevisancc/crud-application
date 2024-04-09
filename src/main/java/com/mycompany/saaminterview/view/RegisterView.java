@@ -4,6 +4,9 @@
  */
 package com.mycompany.saaminterview.view;
 
+import com.mycompany.saaminterview.utils.UtilsString;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author diego
@@ -26,7 +29,7 @@ public class RegisterView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        emailForm = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         registerButton = new javax.swing.JButton();
@@ -38,9 +41,9 @@ public class RegisterView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login");
 
-        jFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
+        emailForm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextField1ActionPerformed(evt);
+                emailFormActionPerformed(evt);
             }
         });
 
@@ -82,7 +85,7 @@ public class RegisterView extends javax.swing.JFrame {
                             .addComponent(registerButton)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
-                            .addComponent(jFormattedTextField1)
+                            .addComponent(emailForm)
                             .addComponent(passwordForm)
                             .addComponent(nameForm, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(139, Short.MAX_VALUE))
@@ -99,7 +102,7 @@ public class RegisterView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(emailForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -113,12 +116,26 @@ public class RegisterView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
-        System.out.println("Teste");
+        String email = this.emailForm.getText();
+        String name = this.nameForm.getText();
+        String password = new String(this.passwordForm.getPassword());
+        
+        Boolean isValidEmail = UtilsString.validateEmail(email);
+        Boolean isValidPassword = password != null && password.length() > 0;
+        Boolean isValidName = name != null && name.length() > 0;
+        
+        if (isValidEmail && isValidPassword && isValidName) {
+          //lógica para criar novo registro no db
+        } else {
+            JOptionPane.showMessageDialog(this, "Cadastro Inválido!", "Alerta", JOptionPane.WARNING_MESSAGE);
+        }
+        
+
     }//GEN-LAST:event_registerButtonActionPerformed
 
-    private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField1ActionPerformed
+    private void emailFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFormActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextField1ActionPerformed
+    }//GEN-LAST:event_emailFormActionPerformed
 
     private void nameFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFormActionPerformed
         // TODO add your handling code here:
@@ -163,7 +180,7 @@ public class RegisterView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JFormattedTextField emailForm;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
