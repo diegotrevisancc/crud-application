@@ -4,6 +4,7 @@
  */
 package com.mycompany.saaminterview.view;
 
+import com.mycompany.saaminterview.control.RegisterController;
 import com.mycompany.saaminterview.utils.UtilsString;
 import javax.swing.JOptionPane;
 
@@ -125,7 +126,13 @@ public class RegisterView extends javax.swing.JFrame {
         Boolean isValidName = name != null && name.length() > 0;
         
         if (isValidEmail && isValidPassword && isValidName) {
-          //lógica para criar novo registro no db
+          RegisterController registerController = new RegisterController();
+          boolean isSaved = registerController.saveRegister(email, name, password);
+          if (isSaved) {
+            JOptionPane.showMessageDialog(this, "Cadastro Efetuado!", "Alerta", JOptionPane.WARNING_MESSAGE);
+          } else {
+            JOptionPane.showMessageDialog(this, "Cadastro não foi efetuado!", "Alerta", JOptionPane.WARNING_MESSAGE);
+          }
         } else {
             JOptionPane.showMessageDialog(this, "Cadastro Inválido!", "Alerta", JOptionPane.WARNING_MESSAGE);
         }

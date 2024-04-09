@@ -16,9 +16,9 @@ public class DatabaseUtils {
     public static Connection getConnection() {
         Connection connection = null;
         try {
-            String url = "jdbc:postgresql://localhost:5432/saam_interview";
-            String user = "diegotrevisancc";
-            String password = "@";
+            String url = "jdbc:postgresql://localhost:5432/saam_inverview";
+            String user = "postgres";
+            String password = "postgres";
             connection = DriverManager.getConnection(url, user, password);
             
             System.out.println("Conexão bem sucedida");
