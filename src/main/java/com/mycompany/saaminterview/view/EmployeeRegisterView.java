@@ -4,6 +4,9 @@
  */
 package com.mycompany.saaminterview.view;
 
+import com.mycompany.saaminterview.utils.UtilsString;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author diego
@@ -41,6 +44,7 @@ public class EmployeeRegisterView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login");
 
+        salaryForm.setText("1000.00");
         salaryForm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salaryFormActionPerformed(evt);
@@ -92,6 +96,7 @@ public class EmployeeRegisterView extends javax.swing.JFrame {
                 .addContainerGap(211, Short.MAX_VALUE))
         );
 
+        dateForm.setText("dd/mm/aaaa");
         dateForm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dateFormActionPerformed(evt);
@@ -153,7 +158,19 @@ public class EmployeeRegisterView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
-        System.out.println("Teste");
+        String salary = this.salaryForm.getText();
+        String name = this.nameForm.getText();
+        String date = this.dateForm.getText();
+        Boolean status = this.employeeStatus.isSelected();
+                
+        Boolean isValidName = name != null && name.length() > 0;
+        Boolean isValidSalary = UtilsString.validateSalary(salary);
+        Boolean isValidDate = UtilsString.validateDate(date);
+        if (isValidName && isValidSalary && isValidDate) {
+          //lógica para criar novo registro no db
+        } else {
+            JOptionPane.showMessageDialog(this, "Cadastro Inválido!", "Alerta", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_registerButtonActionPerformed
 
     private void salaryFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salaryFormActionPerformed
