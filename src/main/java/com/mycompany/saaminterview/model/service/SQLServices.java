@@ -27,7 +27,7 @@ public abstract class SQLServices {
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("conexão encerrada");
+        System.out.println("connection closed");
     }
 
     public Connection getConnection() {

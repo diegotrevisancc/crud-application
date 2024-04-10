@@ -21,10 +21,10 @@ public class DatabaseUtils {
             String password = "postgres";
             connection = DriverManager.getConnection(url, user, password);
             
-            System.out.println("Conexão bem sucedida");
+            System.out.println("Connection well succeded");
             
         } catch (SQLException e) {
-            throw new RuntimeException("Erro ao conectar com o banco de dados!");
+            throw new RuntimeException("Error while trying to connect with database");
         }
         
         return connection;
