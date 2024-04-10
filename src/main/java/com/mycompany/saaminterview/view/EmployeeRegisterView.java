@@ -4,6 +4,7 @@
  */
 package com.mycompany.saaminterview.view;
 
+import com.mycompany.saaminterview.control.EmployeeController;
 import com.mycompany.saaminterview.utils.UtilsString;
 import javax.swing.JOptionPane;
 
@@ -167,7 +168,13 @@ public class EmployeeRegisterView extends javax.swing.JFrame {
         Boolean isValidSalary = UtilsString.validateSalary(salary);
         Boolean isValidDate = UtilsString.validateDate(date);
         if (isValidName && isValidSalary && isValidDate) {
-          //lógica para criar novo registro no db
+         EmployeeController employeeController = new EmployeeController();
+          boolean isSaved = employeeController.saveRegister(name, date, salary, status);
+          if (isSaved) {
+            JOptionPane.showMessageDialog(this, "Cadastro Efetuado!", "Alerta", JOptionPane.WARNING_MESSAGE);
+          } else {
+            JOptionPane.showMessageDialog(this, "Cadastro não foi efetuado!", "Alerta", JOptionPane.WARNING_MESSAGE);
+          }
         } else {
             JOptionPane.showMessageDialog(this, "Cadastro Inválido!", "Alerta", JOptionPane.WARNING_MESSAGE);
         }
