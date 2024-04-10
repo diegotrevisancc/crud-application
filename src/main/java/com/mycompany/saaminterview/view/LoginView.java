@@ -113,7 +113,7 @@ public class LoginView extends javax.swing.JFrame {
             boolean isLoggedIn = loginController.login(email, password);
             if (isLoggedIn) {
                 MainView.EmployeeRegisterButton.setVisible(true);
-                MainView.LoginButton.setEnabled(false);
+                MainView.LoginButton.setVisible(false);
                 JOptionPane.showMessageDialog(this, "Login efetuado!", "Alerta", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(this, "Credênciais inválidas ou usuário não existente!", "Alerta", JOptionPane.WARNING_MESSAGE);
