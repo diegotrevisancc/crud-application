@@ -7,6 +7,7 @@ package com.mycompany.saaminterview.control;
 import com.mycompany.saaminterview.model.service.EmployeeService;
 import com.mycompany.saaminterview.utils.DatabaseUtils;
 import java.sql.Connection;
+import java.sql.ResultSet;
 
 /**
  *
@@ -28,6 +29,15 @@ public class EmployeeController {
             return true;
         } catch (Exception exception) {
             return false;
+        }
+    }
+    
+    public ResultSet getEmployees() {
+        try {
+            ResultSet rs = this.service.getEmployees();
+            return rs;
+        } catch (Exception exception) {
+            return null;
         }
     }
 }
