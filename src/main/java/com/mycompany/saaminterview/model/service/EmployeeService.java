@@ -8,25 +8,26 @@ import com.mycompany.saaminterview.model.entity.Employee;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
  *
  * @author diego
  */
-public class EmployeeService {
-    private Connection connection;
-    
+public class EmployeeService extends SQLServices {    
     public EmployeeService(Connection connection) {
-        this.connection = connection;
+       super(connection);
     }
 
     public void register(String name, String date, String salary, boolean status) {
         try {
             Employee register = new Employee(name, date, salary, status);
             String sql = "INSERT INTO employees (name, hiring_date, salary, status) VALUES (?, ?, ?, ?)";
-            PreparedStatement statement = this.connection.prepareStatement(sql);
+            PreparedStatement statement = super.getConnection().prepareStatement(sql);
             statement.setString(1, register.getName());
             statement.setDate(2, this.dateFormater(register.getHiringDate()));
             statement.setString(3, register.getSalary());
@@ -43,6 +44,8 @@ public class EmployeeService {
 
         } catch (Exception exception) {
             exception.printStackTrace();
+        } finally {
+            super.closeConnection();
         }
     }
     

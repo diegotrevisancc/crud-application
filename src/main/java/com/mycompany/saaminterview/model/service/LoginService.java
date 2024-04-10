@@ -13,11 +13,10 @@ import java.sql.ResultSet;
  *
  * @author diego
  */
-public class LoginService {
-    private Connection connection;
+public class LoginService extends SQLServices{
     
     public LoginService(Connection connection) {
-        this.connection = connection;
+        super(connection);
     }
     
     public boolean login(String email, String password) {
@@ -25,7 +24,7 @@ public class LoginService {
             String encodedPassword = EncodingUtils.encodePassword(password);
             if (encodedPassword != null) {
                 String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
-                PreparedStatement statement = this.connection.prepareStatement(sql);
+                PreparedStatement statement = super.getConnection().prepareStatement(sql);
                 statement.setString(1, email);
                 statement.setString(2, encodedPassword);
                 
@@ -37,6 +36,8 @@ public class LoginService {
             } 
         } catch (Exception exception) {
             exception.printStackTrace();
+        } finally {
+            super.closeConnection();
         }
         return false;
     }

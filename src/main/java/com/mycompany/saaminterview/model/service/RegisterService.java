@@ -13,11 +13,10 @@ import java.sql.PreparedStatement;
  *
  * @author diego
  */
-public class RegisterService {
-    private Connection connection;
-    
+public class RegisterService extends SQLServices {    
+   
     public RegisterService(Connection connection) {
-        this.connection = connection;
+        super(connection);
     }
     
     public void register(String email, String name, String password) {
@@ -26,7 +25,7 @@ public class RegisterService {
             if (encodedPassword != null) {
                 User register = new User(email, name, encodedPassword);          
                 String sql = "INSERT INTO users (email, name, password) VALUES (?, ?, ?)";
-                PreparedStatement statement = this.connection.prepareStatement(sql);
+                PreparedStatement statement = super.getConnection().prepareStatement(sql);
                 statement.setString(1, register.getEmail());
                 statement.setString(2, register.getName());
                 statement.setString(3, register.getPassword());
@@ -41,6 +40,8 @@ public class RegisterService {
             }
         } catch (Exception exception) {
             exception.printStackTrace();
+        } finally {
+            super.closeConnection();
         }
     }
 }
